@@ -28,13 +28,14 @@ def get_excel_context(query):
         df = pd.read_excel(file_path, sheet_name=sheet)
         df = df.dropna(axis=1, how="all")
 
-        mask = df.astype(str).apply(
-            lambda row: any(
-                kw in " ".join(row.values.astype(str)).lower()
-                for kw in keywords
-            ),
-            axis=1,
-        )
+# ✅ SESUDAH
+mask = df.apply(
+    lambda row: any(
+        kw.lower() in " ".join(str(v) for v in row.values).lower()
+        for kw in keywords
+    ),
+    axis=1,
+)
         filtered = df[mask]
         if filtered.empty:
             filtered = df.head(5)
