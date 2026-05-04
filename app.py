@@ -35,14 +35,14 @@ def get_excel_context(query):
             ),
             axis=1,
         )
-    
+
         filtered = df[mask]
         if filtered.empty:
             filtered = df.head(5)
-    
+
         filtered = filtered.drop(columns=["No"], errors="ignore")
         summary += f"\n[DATA]\n{filtered.to_csv(index=False)}\n"
-    
+
     return summary
 
 # ==============================
