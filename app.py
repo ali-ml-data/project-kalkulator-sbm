@@ -43,8 +43,7 @@ def get_excel_context(query):
         filtered = filtered.drop(columns=["No"], errors="ignore")
         summary += f"\n[DATA]\n{filtered.to_csv(index=False)}\n"
 
-    return summary
-
+        return summary
 # ==============================
 # INIT SESSION CHAT HISTORY
 # ==============================
