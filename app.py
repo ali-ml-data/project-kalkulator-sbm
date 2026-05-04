@@ -73,8 +73,8 @@ section.main > div,
 
 /* ─── BLOCK CONTAINER ─── */
 .block-container {
-    max-width: 780px !important;
-    padding: 0 1rem 6rem 1rem !important;
+    max-width: 1060px !important;
+    padding: 0 2rem 6rem 2rem !important;
     margin: 0 auto !important;
     background: transparent !important;
 }
@@ -150,8 +150,8 @@ section.main > div,
 
 /* The content wrapper */
 [data-testid="stChatMessageContent"] {
-    max-width: 72% !important;
-    padding: 12px 16px !important;
+    max-width: 85% !important;
+    padding: 14px 18px !important;
     border-radius: 16px !important;
     font-size: 0.92rem !important;
     line-height: 1.65 !important;
@@ -184,12 +184,20 @@ section.main > div,
 [data-testid="stChatMessageContent"] table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.82rem;
+    font-size: 0.88rem !important;
     font-family: 'JetBrains Mono', monospace;
     margin-top: 10px;
     background: #1a1a1a;
     border-radius: 10px;
     overflow: hidden;
+    white-space: normal !important;
+    word-break: normal !important;
+}
+[data-testid="stChatMessageContent"] td,
+[data-testid="stChatMessageContent"] th {
+    white-space: normal !important;
+    word-break: normal !important;
+    min-width: 80px;
 }
 [data-testid="stChatMessageContent"] th {
     background: #10a37f22;
