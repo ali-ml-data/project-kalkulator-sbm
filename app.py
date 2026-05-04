@@ -35,7 +35,7 @@ mask = df.apply(
         for kw in keywords
     ),
     axis=1,
-)
+    )
         filtered = df[mask]
         if filtered.empty:
             filtered = df.head(5)
