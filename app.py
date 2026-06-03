@@ -228,7 +228,7 @@ section.main > div,
 /* ─── CHAT INPUT ─── */
 [data-testid="stChatInput"],
 [data-testid="stChatInputContainer"] {
-    background: #ffffff !important;
+    background: #000000 !important;
     border: 1px solid #444 !important;
     border-radius: 14px !important;
     padding: 4px 4px 4px 16px !important;
