@@ -236,7 +236,7 @@ section.main > div,
 [data-testid="stChatInput"] textarea,
 [data-testid="stChatInputContainer"] textarea {
     background: transparent !important;
-    color: #ececec !important;
+    color: #000000 !important;
     font-family: 'Sora', sans-serif !important;
     font-size: 0.92rem !important;
     caret-color: #10a37f !important;
