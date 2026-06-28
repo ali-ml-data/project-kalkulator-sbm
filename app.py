@@ -1,22 +1,32 @@
+import os
 import streamlit as st
 import pandas as pd
 from google import genai
 
-# ==============================
-# 1. SETUP CLIENT GEMINI
-# ==============================
-API_KEY = st.secrets["GEMINI_API_KEY"]
-client = genai.Client(api_key=API_KEY)
+# 1. GEMINI API
+def get_api_key():
+    # Cloud 
+    if "GEMINI_API_KEY" in os.environ:
+        return os.environ["GEMINI_API_KEY"]
+    # Streamlit 
+    try:
+        return st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        return None
 
+API_KEY = get_api_key()
+if not API_KEY:
+    st.error("GEMINI_API_KEY belum di-set. Cek environment variable atau secrets.toml.")
+    st.stop()
+
+client = genai.Client(api_key=API_KEY)
 st.set_page_config(
     page_title="PUSBIN AI 2026",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# ==============================
-# 2. LOAD & FORMAT EXCEL CONTEXT
-# ==============================
+# 2. LOAD EXCEL
 @st.cache_data
 def get_excel_context(query):
     file_path = "Database_Kantor.xlsx"
@@ -44,15 +54,12 @@ def get_excel_context(query):
         summary += f"\n[DATA]\n{filtered.to_csv(index=False)}\n"
 
     return summary
-# ==============================
-# INIT SESSION CHAT HISTORY
-# ==============================
+    
+# CHAT HISTORY
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# ==============================
-# 3. DARK MODE UI — ChatGPT STYLE
-# ==============================
+# 3. UI
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -277,9 +284,7 @@ section.main > div,
 </style>
 """, unsafe_allow_html=True)
 
-# ==============================
-# HERO SECTION
-# ==============================
+# HERO
 st.markdown("""
 <div class="arin-hero">
     <div class="arin-logo">🤖</div>
@@ -295,9 +300,7 @@ st.markdown("""
 
 st.caption("💡 Coba: \"Hitung biaya perjalanan dinas luar kota 3 orang 2 hari\"")
 
-# ==============================
-# TAMPILKAN CHAT HISTORY
-# ==============================
+# CHAT HISTORY
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
@@ -307,9 +310,7 @@ for msg in st.session_state.messages:
 # ==============================
 user_input = st.chat_input("Tanya Arin sesuatu...")
 
-# ==============================
 # 4. LOGIC AI
-# ==============================
 if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
