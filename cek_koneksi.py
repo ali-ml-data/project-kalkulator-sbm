@@ -1,6 +1,5 @@
 import google.generativeai as genai
 
-# GANTI DENGAN API KEY KAMU
 API_KEY = st.secrets["GEMINI_API_KEY"]
 client = genai.Client(api_key=API_KEY)
 
