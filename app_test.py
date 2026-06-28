@@ -3,9 +3,7 @@ import pandas as pd
 
 EXCEL_FILE = "Database_Kantor.xlsx"
 
-# -----------------------------
 # LOAD DATA
-# -----------------------------
 @st.cache_data
 def load_data():
     return {
@@ -17,9 +15,7 @@ def load_data():
 data = load_data()
 st.write("Kolom sheet Pesawat:", data["pesawat"].columns.tolist())
 
-# -----------------------------
 # PARSER INPUT
-# -----------------------------
 def parse_input(text):
     parts = text.lower().split()
 
@@ -33,9 +29,7 @@ def parse_input(text):
 
     return kota, hari, orang, komponen
 
-# -----------------------------
 # CARI PROVINSI DARI SHEET PESAWAT
-# -----------------------------
 def get_provinsi(kota, df_pesawat):
     row = df_pesawat[
         df_pesawat["Kota Tujuan"].str.lower() == kota
